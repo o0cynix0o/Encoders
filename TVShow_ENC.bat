@@ -10,4 +10,4 @@ if "%~1" == "" (
 REM Run the PowerShell script with the dropped folder as a parameter
 powershell.exe -ExecutionPolicy Bypass -File "G:\Scripts\Working\TVShowENC.ps1" "%~1"
 
-pause
+REM pause <<Edited out to see the script still pause
