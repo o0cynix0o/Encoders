@@ -8,7 +8,7 @@ if (-not $sourceDir) {
 }
 
 # Specify the video file extensions
-$videoExtensions = @('*.mp4', '*.mkv', '*.avi', '*.mov', '*.wmv')
+$videoExtensions = @('*.mp4', '*.mkv', '*.avi', '*.mov', '*.wmv', '*.iso', '*.webm')
 
 # Initialize variables to store information about the largest video file
 $largestVideoFile = $null
