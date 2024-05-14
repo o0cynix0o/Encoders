@@ -8,6 +8,6 @@ if "%~1" == "" (
 )
 
 REM Run the MovieENC PowerShell script with the dropped folder as a parameter
-powershell.exe -ExecutionPolicy Bypass -File "G:\Scripts\Working\MovieENC.ps1" "%~1"
+powershell.exe -ExecutionPolicy Bypass -File "G:\VSCode\Encoders\MovieENC.ps1" "%~1"
 
 Rem pause << Editied out to see if the script still pauses
