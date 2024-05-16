@@ -1,3 +1,9 @@
+<#
+Script Variables:
+$outputDir - Directory where the converted video will be saved.
+$handBrakePreset - Path to the HandBrake preset file.
+#>
+
 param (
     [string]$sourceDir = $args[0]
 )
@@ -8,7 +14,7 @@ if (-not $sourceDir) {
 }
 
 # Specify the video file extensions
-$videoExtensions = @('*.mp4', '*.mkv', '*.avi', '*.mov', '*.wmv')
+$videoExtensions = @('*.mp4', '*.mkv', '*.avi', '*.mov', '*.wmv', '*.iso', '*.webm')
 
 # Initialize variables to store information about the largest video file
 $largestVideoFile = $null
@@ -35,15 +41,20 @@ if (-not $largestVideoFile) {
     exit
 }
 
+# Set the output directory for the converted video
+$outputDir = "REPLACE_WITH_OUTPUT_DIRECTORY" # Directory where the converted video will be saved.
+
+# Set the path to the HandBrake preset file
+$handBrakePreset = "REPLACE_WITH_PRESET_FILE_PATH" # Path to the HandBrake preset file.
+
 # Convert the largest video file to MKV format using HandBrakeCLI
-$outputDir = "G:\Downloads\TV"
 $outputFileName = $largestVideoFile | Split-Path -Leaf
 $outputFilePath = "$outputDir\$($outputFileName.Replace('.', '_')).mkv"
 Write-Host "Processing video file: $largestVideoFile"
 
 # Start HandBrakeCLI process and display output on the screen
-Start-Process -FilePath "HandBrakeCLI" -ArgumentList "-i `"$largestVideoFile`" -o `"$outputFilePath`" --preset-import-gui --verbose=1" -NoNewWindow -Wait
-Write-Host "Conversion complete."
+Start-Process -FilePath "HandBrakeCLI" -ArgumentList "-i `"$largestVideoFile`" -o `"$outputFilePath`" --preset-import-file `"$handBrakePreset`" --preset `"Super Shrink - HD`" --verbose=1" -NoNewWindow -Wait
 
-# Close the PowerShell window
+# Ending Script
+Write-Host "Conversion complete."
 exit
