@@ -1,0 +1,32 @@
+import os
+import subprocess
+
+def main():
+    # Variables for the script, these need to be set for the environment being used.
+    path_to_handbrake_cli = "/opt/homebrew/Cellar/handbrake/1.7.3/bin/HandBrakeCLI"
+    path_to_hb_preset = "/Users/danielwatson/Scripts/Encoder/Presets/SuperShrinkHD.json"
+    path_to_output = "/Users/danielwatson/Scripts/Reencoded"
+    directory_to_scan = "/Users/danielwatson/Scripts/Video"
+
+    # List all files in the directory
+    files_to_be_processed = [os.path.join(directory_to_scan, f) for f in os.listdir(directory_to_scan) if os.path.isfile(os.path.join(directory_to_scan, f))]
+
+    # Start of the loop for processing.
+    for file in files_to_be_processed:
+        input_file = file  # Assuming the file paths are directly provided
+        output_file = os.path.join(path_to_output, os.path.basename(file))
+        handbrake_command = [
+            path_to_handbrake_cli,
+            "-i", input_file,
+            "-o", output_file,
+            "--preset-import-file", path_to_hb_preset,
+            "--preset", "SuperShrinkHD"
+        ]
+
+        # Execute HandBrakeCLI command
+        subprocess.run(handbrake_command)
+
+    print("All Encodes have been completed.")
+
+if __name__ == "__main__":
+    main()
